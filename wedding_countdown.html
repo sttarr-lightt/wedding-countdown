@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Countdown</title>
+<style>
+body{
+  margin:0;
+  font-family: Georgia, serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  background:#f8f4f1;
+}
+.card{
+  text-align:center;
+  padding:30px;
+}
+#countdown{
+  font-size:2rem;
+  line-height:1.5;
+}
+.small{
+  margin-top:10px;
+  font-size:1rem;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div id="countdown">Loading...</div>
+  <div class="small">19 September 2026 • 5:00 PM (Maldives Time, UTC+5)</div>
+</div>
+
+<script>
+const weddingDate = new Date("2026-09-19T17:00:00+05:00");
+
+function updateCountdown(){
+  const now = new Date();
+  const diff = weddingDate - now;
+
+  if(diff <= 0){
+    document.getElementById("countdown").innerHTML = "We're Married! 💍";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((diff % (1000*60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+    `${days} Days<br>${hours} Hours • ${minutes} Minutes • ${seconds} Seconds`;
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
